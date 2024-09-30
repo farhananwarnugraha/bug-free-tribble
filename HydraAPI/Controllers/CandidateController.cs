@@ -1,11 +1,12 @@
 ﻿using HydraAPI.Candidates;
 using HydraAPI.Candidates.DTO;
 using HydraAPI.Shared;
+using HydraAPI.Shared.Enum;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HydraAPI.Controllers
 {
-    [Route("api/v1/candidate")]
+    [Route("api/v1/")]
     [ApiController]
     public class CandidateController : ControllerBase
     {
@@ -16,7 +17,7 @@ namespace HydraAPI.Controllers
             _candidateService = candidateService;
         }
 
-        [HttpGet]
+        [HttpGet("allcandidate")]
         public IActionResult Get()
         {
             try
@@ -40,6 +41,65 @@ namespace HydraAPI.Controllers
                 return BadRequest(response);
             }
             
+        }
+        [HttpGet("candidate")]
+        public IActionResult Get(int pageNumber = (int)Pagination.PAGE_NUMBER, int pageSize = (int) Pagination.PAGE_SIZE, string fullName="", int batchBootacamp=0){
+            var allCandidate = _candidateService.GetCandidate(pageNumber, pageSize, fullName, batchBootacamp);
+            var response = new ResponseDTO<CandidateIndexDTO>()
+            {
+                status = 200,
+                Message = "Berhasil",
+                Data = allCandidate
+            };
+            return Ok(response);
+        }
+        [HttpPost("candidate")]
+        public IActionResult Insert(CandidateReqDTO request){
+            try
+            {
+                _candidateService.Insert(request);
+                var response = new ResponseDTO<string>()
+                {
+                    status = 200,
+                    Message = "Success",
+                    Data = "Berhasil Menambahkan Dta"
+                };
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                var response = new ResponseDTO<string>()
+                {
+                    status = 400,
+                    Message = "Failed",
+                    Data = "Gagal Menambahkan Data"
+                };
+                return BadRequest(response);
+            }
+        }
+        [HttpGet("candidate/{candidateId}")]
+        public IActionResult Get(int candidateId){
+            try
+            {
+                var candidate = _candidateService.GetById(candidateId);
+                var response = new ResponseDTO<CandidateReqDTO>()
+                {
+                    status = 200,
+                    Message = "Berhasil",
+                    Data = candidate
+                };
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                var response = new ResponseDTO<string>()
+                {
+                    status = 500,
+                    Message = "Gagal",
+                    Data = null
+                };
+                return BadRequest(response);
+            }
         }
     }
 }

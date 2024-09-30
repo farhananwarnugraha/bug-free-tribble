@@ -18,7 +18,7 @@ namespace HydraAPI.Repository
             return _candidateContext.Candidates
                 .Where(
                     candidate => (candidate.FirstName + candidate.LastName).ToLower().Contains(fullName ?? "".ToLower()) &&
-                    candidate.BootcampClassId == batchBootcamp
+                    (batchBootcamp == 0 || candidate.BootcampClassId == batchBootcamp)
                 )
             .Count();
         }
@@ -45,7 +45,7 @@ namespace HydraAPI.Repository
             var candidateModel = _candidateContext.Candidates
                 .Where(
                     candidate => (candidate.FirstName + candidate.LastName).ToLower().Contains(fullName ?? "".ToLower()) &&
-                    candidate.BootcampClassId == batchBootacamp
+                    (batchBootacamp == 0 || candidate.BootcampClassId == batchBootacamp)
                 )
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(
