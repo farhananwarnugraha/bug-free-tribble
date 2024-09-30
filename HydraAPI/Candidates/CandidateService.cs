@@ -78,5 +78,18 @@ namespace HydraAPI.Candidates
                 PhoneNumber = model.PhoneNumber
             };
         }
+
+        public void Update(CandidateReqDTO request){
+            _candidateRepository.Update(new Candidate{
+                BootcampClassId = request.BootcampClass,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Gender = request.Gender,
+                BirthDate = request.BirthDate,
+                Address = request.Address,
+                Domicile = request.Domicile,
+                PhoneNumber = request.PhoneNumber
+            });
+        }
     }
 }

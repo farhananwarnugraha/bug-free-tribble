@@ -101,5 +101,30 @@ namespace HydraAPI.Controllers
                 return BadRequest(response);
             }
         }
+
+        [HttpPut("candidate")]
+        public IActionResult Update(CandidateReqDTO request){
+            try
+            {
+                _candidateService.Update(request);
+                var response = new ResponseDTO<string>()
+                {
+                    status = 200,
+                    Message = "Success",
+                    Data = "Berhasil Mengubah Data"
+                };
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                var response = new ResponseDTO<string>()
+                {
+                    status = 400,
+                    Message = "Failed",
+                    Data = "Gagal Mengubah Data"
+                };
+                return BadRequest(response);
+            }
+        }
     }
 }
