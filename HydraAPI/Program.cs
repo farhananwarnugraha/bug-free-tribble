@@ -1,3 +1,4 @@
+using HydraAPI.Bootcamp;
 using HydraAPI.Candidates;
 using HydraAPI.Interfaces;
 using HydraAPI.Models;
@@ -22,6 +23,8 @@ options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectio
 //Register the Repository and service
 builder.Services.AddScoped<ICandidateRepository, CandidateRepository>();
 builder.Services.AddScoped<CandidateService>();
+builder.Services.AddScoped<IBootcampClass, BootcampClassRepository>();
+builder.Services.AddScoped<BootcampService>();
 
 builder.Services.AddControllers();
 
