@@ -84,4 +84,24 @@ public class BootcamclassController : ControllerBase
             return BadRequest(response);
         }
     }
+    [HttpPost("bootcampclass")]
+    public IActionResult Insert([FromBody]BootcampInsertDTO request){
+        try{
+            _bcService.Insert(request);
+            var response = new ResponseDTO<string>(){
+                status = 200,
+                Message = "Success",
+                Data = "Berhasil Menambahkan Data"
+            };
+            return Ok(response);
+        }
+        catch (System.Exception){
+            var response = new ResponseDTO<string>(){
+                status = 400,
+                Message = "Failed",
+                Data = "Gagal Menambahkan Data"
+            };
+            return BadRequest(response);
+        }
+    } 
 }

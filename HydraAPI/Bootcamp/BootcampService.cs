@@ -2,6 +2,7 @@ using System;
 using System.Globalization;
 using HydraAPI.Bootcamp.DTO;
 using HydraAPI.Interfaces;
+using HydraAPI.Models;
 using HydraAPI.Shared;
 using HydraAPI.Shared.Enum;
 
@@ -56,4 +57,11 @@ public class BootcampService
             EndDate = model.EndDate?.ToString("yyyy-MM-dd"),
         };
     }
+
+    public void Insert(BootcampInsertDTO request) => 
+        _bootcampClassRepository.Insert(new BootcampClass{
+          Description = request.Description,
+          StartDate = request.StartDate,
+          EndDate = request.EndDate  
+        });
 }
