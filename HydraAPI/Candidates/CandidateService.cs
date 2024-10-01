@@ -65,9 +65,10 @@ namespace HydraAPI.Candidates
                 PhoneNumber = request.PhoneNumber
             });
 
-        public CandidateReqDTO GetById(int candidateId){
+        public CandidateUpdateDTO GetById(int candidateId){
             var model = _candidateRepository.Get(candidateId);
-            return new CandidateReqDTO(){
+            return new CandidateUpdateDTO(){
+                CandidateId = model.Id,
                 BootcampClass = model.BootcampClassId,
                 FirstName = model.FirstName,
                 LastName = model.LastName,
@@ -75,12 +76,14 @@ namespace HydraAPI.Candidates
                 BirthDate = model.BirthDate,
                 Address = model.Address,
                 Domicile = model.Domicile,
-                PhoneNumber = model.PhoneNumber
+                PhoneNumber = model.PhoneNumber,
+                IsActive = model.IsActive
             };
         }
 
-        public void Update(CandidateReqDTO request){
+        public void Update(CandidateUpdateDTO request){
             _candidateRepository.Update(new Candidate{
+                Id = request.CandidateId,
                 BootcampClassId = request.BootcampClass,
                 FirstName = request.FirstName,
                 LastName = request.LastName,
@@ -88,7 +91,8 @@ namespace HydraAPI.Candidates
                 BirthDate = request.BirthDate,
                 Address = request.Address,
                 Domicile = request.Domicile,
-                PhoneNumber = request.PhoneNumber
+                PhoneNumber = request.PhoneNumber,
+                IsActive = request.IsActive
             });
         }
     }

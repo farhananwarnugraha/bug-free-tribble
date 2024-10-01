@@ -82,7 +82,7 @@ namespace HydraAPI.Controllers
             try
             {
                 var candidate = _candidateService.GetById(candidateId);
-                var response = new ResponseDTO<CandidateReqDTO>()
+                var response = new ResponseDTO<CandidateUpdateDTO>()
                 {
                     status = 200,
                     Message = "Berhasil",
@@ -103,7 +103,7 @@ namespace HydraAPI.Controllers
         }
 
         [HttpPut("candidate")]
-        public IActionResult Update(CandidateReqDTO request){
+        public IActionResult Update(CandidateUpdateDTO request){
             try
             {
                 _candidateService.Update(request);
