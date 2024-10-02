@@ -62,6 +62,78 @@ public class BootcampService
         _bootcampClassRepository.Insert(new BootcampClass{
           Description = request.Description,
           StartDate = request.StartDate,
-          EndDate = request.EndDate  
+          EndDate = request.EndDate,
+          Progress = 1,
         });
+
+    public void Update(BootcampUpdateDTO request) => 
+        _bootcampClassRepository.Update(new BootcampClass{
+            Id = request.BootcampId,
+            Description = request.Description,
+            StartDate = request.StartDate,
+            EndDate = request.EndDate
+        });
+
+    public BootcampPlanedDTO GetBootcampPlaned(int pageNumber, int pageSize, int batchBootcamp, string bootcampName){
+        var model = _bootcampClassRepository.BetBootcampPlaned(pageNumber, pageSize, batchBootcamp, bootcampName)
+            .Select(
+                 bootcamp => new BootcampDTO(){
+                 BootcampId = bootcamp.Id,
+                 Description = bootcamp.Description??"Not Set",
+                 StartDate = bootcamp.StartDate.ToString("yyyy-MM-dd"),
+                 EndDate = bootcamp.EndDate?.ToString("yyyy-MM-dd"),
+                 TotalCandidates = bootcamp.Candidates.Count(),
+                }
+            ) ;
+        return new BootcampPlanedDTO(){
+            BootcampsData = model.ToList(),
+            Pagination = new PaginationDTO(){
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                TotalRows = _bootcampClassRepository.Count(batchBootcamp, bootcampName)
+            }
+        };
+    }
+
+    public BootcampPlanedDTO GetBootcampActive(int pageNumber, int pageSize, int batchBootcamp, string bootcampName){
+        var model = _bootcampClassRepository.GetBootcampActive(pageNumber, pageSize, batchBootcamp, bootcampName)
+            .Select(
+                 bootcamp => new BootcampDTO(){
+                 BootcampId = bootcamp.Id,
+                 Description = bootcamp.Description??"Not Set",
+                 StartDate = bootcamp.StartDate.ToString("yyyy-MM-dd"),
+                 EndDate = bootcamp.EndDate?.ToString("yyyy-MM-dd"),
+                 TotalCandidates = bootcamp.Candidates.Count(),
+                }
+            ) ;
+        return new BootcampPlanedDTO(){
+            BootcampsData = model.ToList(),
+            Pagination = new PaginationDTO(){
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                TotalRows = _bootcampClassRepository.Count(batchBootcamp, bootcampName)
+            }
+        };
+    }
+
+    public BootcampPlanedDTO GetBootcampCompleted(int pageNumber, int pageSize, int batchBootcamp, string bootcampName){
+        var model = _bootcampClassRepository.GetBootcampCompleted(pageNumber, pageSize, batchBootcamp, bootcampName)
+            .Select(
+                 bootcamp => new BootcampDTO(){
+                 BootcampId = bootcamp.Id,
+                 Description = bootcamp.Description??"Not Set",
+                 StartDate = bootcamp.StartDate.ToString("yyyy-MM-dd"),
+                 EndDate = bootcamp.EndDate?.ToString("yyyy-MM-dd"),
+                 TotalCandidates = bootcamp.Candidates.Count(),
+                }
+            ) ;
+        return new BootcampPlanedDTO(){
+            BootcampsData = model.ToList(),
+            Pagination = new PaginationDTO(){
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                TotalRows = _bootcampClassRepository.Count(batchBootcamp, bootcampName)
+            }
+        };
+    }
 }

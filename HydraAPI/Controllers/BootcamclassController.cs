@@ -104,4 +104,89 @@ public class BootcamclassController : ControllerBase
             return BadRequest(response);
         }
     } 
+    [HttpPut("bootcamp")]
+    public IActionResult Update([FromBody]BootcampUpdateDTO request){
+        try{
+            _bcService.Update(request);
+            var response = new ResponseDTO<string>(){
+                status = 200,
+                Message = "Success",
+                Data = "Bootcamp " + request.Description + " Bersil di ubah"
+            };
+            return Ok(response);
+        }
+        catch(System.Exception){
+            return BadRequest(new ResponseDTO<string>(){
+                status = 400,
+                Message = "Failed",
+                Data = "Gagal melakukan update data"
+            });
+        }
+    }
+    [HttpGet("bootcamp/planed")]
+    public IActionResult GetPlanedBootcamp(int pageNumber = (int)Pagination.PAGE_NUMBER, int pageSize = (int)Pagination.PAGE_SIZE, int batchBootcamp = 0, string bootcampName = ""){
+        try
+        {
+            var bootcamp = _bcService.GetBootcampPlaned(pageNumber, pageSize, batchBootcamp, bootcampName);
+            var response = new ResponseDTO<BootcampPlanedDTO>(){
+                status = 200,
+                Message = "Success",
+                Data = bootcamp
+            };
+            return Ok(response);
+        }
+        catch (System.Exception)
+        {
+            var response = new ResponseDTO<string>(){
+                status = 400,
+                Message = "Failed",
+                Data = null
+            };
+            return BadRequest(response);
+        }
+    }
+    [HttpGet("bootcamp/active")]
+    public IActionResult GetActiveBootcamp(int pageNumber = (int)Pagination.PAGE_NUMBER, int pageSize = (int)Pagination.PAGE_SIZE, int batchBootcamp = 0, string bootcampName = ""){
+        try
+        {
+            var bootcamp = _bcService.GetBootcampActive(pageNumber, pageSize, batchBootcamp, bootcampName);
+            var response = new ResponseDTO<BootcampPlanedDTO>(){
+                status = 200,
+                Message = "Success",
+                Data = bootcamp
+            };
+            return Ok(response);
+        }
+        catch (System.Exception)
+        {
+            var response = new ResponseDTO<string>(){
+                status = 400,
+                Message = "Failed",
+                Data = null
+            };
+            return BadRequest(response);
+        }
+    }
+    [HttpGet("bootcamp/completed")]
+    public IActionResult GetCompletedBootcamp(int pageNumber = (int)Pagination.PAGE_NUMBER, int pageSize = (int)Pagination.PAGE_SIZE, int batchBootcamp = 0, string bootcampName = ""){
+        try
+        {
+            var bootcamp = _bcService.GetBootcampCompleted(pageNumber, pageSize, batchBootcamp, bootcampName);
+            var response = new ResponseDTO<BootcampPlanedDTO>(){
+                status = 200,
+                Message = "Success",
+                Data = bootcamp
+            };
+            return Ok(response);
+        }
+        catch (System.Exception)
+        {
+            var response = new ResponseDTO<string>(){
+                status = 400,
+                Message = "Failed",
+                Data = null
+            };
+            return BadRequest(response);
+        }
+    }
 }
