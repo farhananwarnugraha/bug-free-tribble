@@ -103,9 +103,12 @@ public class BootcampService
                  Description = bootcamp.Description??"Not Set",
                  StartDate = bootcamp.StartDate.ToString("yyyy-MM-dd"),
                  EndDate = bootcamp.EndDate?.ToString("yyyy-MM-dd"),
-                 TotalCandidates = bootcamp.Candidates.Count(),
+                 TrainerName = bootcamp.Courses.Select(
+                    course => course.TrainerSkillDetail.Trainer.FirstName + " " + course.TrainerSkillDetail.Trainer.LastName).FirstOrDefault()??"Not Set",
+                 CourseName = bootcamp.Courses.Select(
+                    course => course.TrainerSkillDetail.Skill.Name).FirstOrDefault()??"Not Set",               
                 }
-            ) ;
+            );
         return new BootcampPlanedDTO(){
             BootcampsData = model.ToList(),
             Pagination = new PaginationDTO(){

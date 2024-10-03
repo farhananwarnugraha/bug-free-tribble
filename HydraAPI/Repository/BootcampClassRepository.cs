@@ -1,4 +1,5 @@
 using System;
+using BCrypt.Net;
 using HydraAPI.Interfaces;
 using HydraAPI.Models;
 using Microsoft.EntityFrameworkCore;
@@ -68,12 +69,22 @@ public class BootcampClassRepository : IBootcampClass
     public List<BootcampClass> GetBootcampActive(int pageNumber, int pageSize, int batchBootcamp, string bootcampName)
     {
         return _dbContext.BootcampClasses
-        .Include(bootcamCandidate => bootcamCandidate.Candidates)
+        .Include(bc => bc.Courses)
+            .ThenInclude(c => c.TrainerSkillDetail)
+                .ThenInclude(tsd => tsd.Trainer)
+        .Include(bc => bc.Courses)
+            .ThenInclude(c => c.TrainerSkillDetail)
+                .ThenInclude(tsd => tsd.Skill)
         .Where(
             bootcamp => 
                 (bootcamp.Description??"").ToLower().Contains(bootcampName??"".ToLower()) && 
                 (batchBootcamp == 0 || bootcamp.Id == batchBootcamp) 
-                && bootcamp.Progress == 2
+                && 
+                (bootcamp.Progress == 2 || bootcamp.Courses.Any(c => c.Progress == 2 &&
+                    (c.Progress !=3 || c.EvaluationDate == null) &&
+                    _dbContext.TrainerSkillDetails.Any(
+                        tsd => tsd.TrainerId == c.TrainerId && tsd.SkillId == c.SkillId)
+                    ))
         )
         .Skip((pageNumber - 1) * pageSize)
         .Take(pageSize)

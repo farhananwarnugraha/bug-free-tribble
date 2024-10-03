@@ -9,4 +9,6 @@ public class BootcampDTO
     public string StartDate { get; set; } = null!;
     public string? EndDate { get; set; } 
     public int? TotalCandidates { get; set; }
+    public string? TrainerName { get; set; }
+    public string? CourseName { get; set; }
 }
