@@ -10,6 +10,7 @@ public interface IBootcampClass
     List<BootcampClass> BetBootcampPlaned(int pageNumber, int pageSize, int batchBootcamp, string bootcampName);
     List<BootcampClass> GetBootcampActive(int pageNumber, int pageSize, int batchBootcamp, string bootcampName);
     List<BootcampClass> GetBootcampCompleted(int pageNumber, int pageSize, int batchBootcamp, string bootcampName);
+    BootcampClass GetDetailBootcamp(int batchBootcamp);
     BootcampClass Get(int bootcampId);
     int Count(int batchBootcamp, string bootcampName);
     void Insert(BootcampClass bootcampClass);

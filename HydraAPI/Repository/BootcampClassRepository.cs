@@ -84,7 +84,8 @@ public class BootcampClassRepository : IBootcampClass
                     (c.Progress !=3 || c.EvaluationDate == null) &&
                     _dbContext.TrainerSkillDetails.Any(
                         tsd => tsd.TrainerId == c.TrainerId && tsd.SkillId == c.SkillId)
-                    ))
+                    )
+                )
         )
         .Skip((pageNumber - 1) * pageSize)
         .Take(pageSize)
@@ -104,6 +105,23 @@ public class BootcampClassRepository : IBootcampClass
         .Skip((pageNumber - 1) * pageSize)
         .Take(pageSize)
         .ToList();
+    }
+
+    public BootcampClass GetDetailBootcamp(int batchBootcamp)
+    {
+        return _dbContext.BootcampClasses
+        .Include(bc => bc.Courses)
+            .ThenInclude(c => c.TrainerSkillDetail)
+                .ThenInclude(tsd => tsd.Trainer)
+        .Include(bc => bc.Courses)
+            .ThenInclude(c => c.TrainerSkillDetail)
+                .ThenInclude(tsd => tsd.Skill)
+        .Where(
+             bootcamp => bootcamp.Progress == 2 || bootcamp.Courses.Any(c => c.Progress == 2 &&
+                    (c.Progress !=3 || c.EvaluationDate == null) &&
+                    _dbContext.TrainerSkillDetails.Any(
+                        tsd => tsd.TrainerId == c.TrainerId && tsd.SkillId == c.SkillId))
+        ).FirstOrDefault() ?? throw new Exception("Bootcam Not Found");
     }
 
     public void Insert(BootcampClass bootcampClass)
