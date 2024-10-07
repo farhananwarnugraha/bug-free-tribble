@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HydraAPI.Controllers;
 
 [Route("api/v1")]
+[ApiController]
 public class BootcamclassController : ControllerBase
 {
     private readonly BootcampService _bcService;
@@ -173,6 +174,28 @@ public class BootcamclassController : ControllerBase
         {
             var bootcamp = _bcService.GetBootcampCompleted(pageNumber, pageSize, batchBootcamp, bootcampName);
             var response = new ResponseDTO<BootcampPlanedDTO>(){
+                status = 200,
+                Message = "Success",
+                Data = bootcamp
+            };
+            return Ok(response);
+        }
+        catch (System.Exception)
+        {
+            var response = new ResponseDTO<string>(){
+                status = 400,
+                Message = "Failed",
+                Data = null
+            };
+            return BadRequest(response);
+        }
+    }
+    [HttpGet("bootcamp/{bootcampId}/detail")]
+    public IActionResult GetDetailBootcamp(int bootcampId){
+        try
+        {
+            var bootcamp = _bcService.GetBootcampActiveDetile(bootcampId);
+            var response = new ResponseDTO<BootcampActiveDetileDTO>(){
                 status = 200,
                 Message = "Success",
                 Data = bootcamp

@@ -1,5 +1,6 @@
 using HydraAPI.Bootcamp;
 using HydraAPI.Candidates;
+using HydraAPI.Courses;
 using HydraAPI.Interfaces;
 using HydraAPI.Models;
 using HydraAPI.Repository;
@@ -25,7 +26,12 @@ builder.Services.AddScoped<ICandidateRepository, CandidateRepository>();
 builder.Services.AddScoped<CandidateService>();
 builder.Services.AddScoped<IBootcampClass, BootcampClassRepository>();
 builder.Services.AddScoped<BootcampService>();
-
+builder.Services.AddScoped<ISkillRepository, SkillRepository>();
+builder.Services.AddScoped<ITrainerRepository, TrainerRepository>();
+builder.Services.AddScoped<ITrainerSkillDetileRepository, TrainerSkillDetailRepository>();
+builder.Services.AddScoped<ICandidateEvaluationRepository, CandidateEvaluationRepository>();
+builder.Services.AddScoped<ICourseRepository, CourseClassRepository>();
+builder.Services.AddScoped<CourseService>();
 builder.Services.AddControllers();
 
 //setting authentication 

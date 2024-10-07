@@ -106,7 +106,7 @@ public class BootcampClassRepository : IBootcampClass
         .Take(pageSize)
         .ToList();
     }
-
+    // get detail bootcamp active
     public BootcampClass GetDetailBootcamp(int batchBootcamp)
     {
         return _dbContext.BootcampClasses
@@ -120,7 +120,8 @@ public class BootcampClassRepository : IBootcampClass
              bootcamp => bootcamp.Progress == 2 || bootcamp.Courses.Any(c => c.Progress == 2 &&
                     (c.Progress !=3 || c.EvaluationDate == null) &&
                     _dbContext.TrainerSkillDetails.Any(
-                        tsd => tsd.TrainerId == c.TrainerId && tsd.SkillId == c.SkillId))
+                        tsd => tsd.TrainerId == c.TrainerId && tsd.SkillId == c.SkillId)) &&
+            bootcamp.Id == batchBootcamp            
         ).FirstOrDefault() ?? throw new Exception("Bootcam Not Found");
     }
 

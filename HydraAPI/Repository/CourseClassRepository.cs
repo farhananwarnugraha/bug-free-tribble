@@ -14,6 +14,27 @@ public class CourseClassRepository : ICourseRepository
         _dbContext = dbContext;
     }
 
+    public void Add(Course course)
+    {
+        _dbContext.Add(course);
+        _dbContext.SaveChanges();
+    }
+
+    public void Delete(Course course)
+    {
+        throw new NotImplementedException();
+    }
+
+    public List<Course> GetAllCourse()
+    {
+        throw new NotImplementedException();
+    }
+
+    public Course GetCourse(string courseId)
+    {
+        throw new NotImplementedException();
+    }
+
     public List<Course> GetSchedule(int boootcampClassId)
     {
         return _dbContext.Courses
@@ -25,5 +46,10 @@ public class CourseClassRepository : ICourseRepository
             schedule => schedule.BootcampClassId == boootcampClassId
         )
         .ToList();
+    }
+
+    public void Update(Course course)
+    {
+        throw new NotImplementedException();
     }
 }

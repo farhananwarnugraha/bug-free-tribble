@@ -139,4 +139,17 @@ public class BootcampService
             }
         };
     }
+
+    public BootcampActiveDetileDTO GetBootcampActiveDetile(int id){
+        var model = _bootcampClassRepository.Get(id);
+        return new BootcampActiveDetileDTO(){
+            BootcampId = model.Id,
+            TrainerId = model.Courses.Select(
+                trainer => trainer.TrainerSkillDetail.Trainer.Id).FirstOrDefault(),
+            SkillId = model.Courses.Select(
+                course => course.TrainerSkillDetail.Skill.Id).FirstOrDefault()??"Not Set",
+            StartDate = model.StartDate,
+            EndDate = model.EndDate,
+        };
+    }
 }
