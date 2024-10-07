@@ -29,4 +29,21 @@ public class CourseService
         };
         _courseRepository.Add(course);
     }
+
+    public List<CourseScheduuleDTO> GetSchedule(int bootcampId){
+        return _courseRepository.GetSchedule(bootcampId)
+            .Select(
+                schedule => new CourseScheduuleDTO{
+                    courseId = schedule.Id,
+                    MateriBootcamp = schedule.TrainerSkillDetail.Skill.Name,
+                    TrainerName = schedule.TrainerSkillDetail.Trainer.FirstName + " " + schedule.TrainerSkillDetail.Trainer.LastName,
+                    StartDate = schedule.StartDate.ToString("dd/MM/yyyy"),
+                    EndDate = schedule.EndDate.ToString("dd/MM/yyyy"),
+                    Status = schedule.Progress.ToString() == 1.ToString() ? "Planed" : 
+                            schedule.Progress.ToString() == 2.ToString() ? "Active" : 
+                            schedule.Progress.ToString() == 3.ToString() ? "Completed" : "Cancelled",
+                    EvaluationDate = schedule.EvaluationDate?.ToString("dd/MM/yyyy")
+                }
+            ).ToList();
+    }
 }

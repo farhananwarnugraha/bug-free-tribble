@@ -37,5 +37,25 @@ namespace HydraAPI.Controllers
                 return BadRequest(respose);
             }
         }
+        [HttpGet("/bootcampclass/schedule/{batchBootcamp}")]
+        public IActionResult GetSchedule(int batchBootcamp){
+            try{
+                var schedule = _courseService.GetSchedule(batchBootcamp);
+                var respose = new ResponseDTO<List<CourseScheduuleDTO>>(){
+                    status = 200,
+                    Message = "Success",
+                    Data = schedule
+                };
+                return Ok(respose);
+            }
+            catch{
+                var respose = new ResponseDTO<List<CourseScheduuleDTO>>(){
+                    status = 400,
+                    Message = "Failed",
+                    Data = null
+                };
+                return BadRequest(respose);
+            }
+        }
     }
 }
