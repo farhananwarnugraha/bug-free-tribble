@@ -37,7 +37,7 @@ namespace HydraAPI.Controllers
                 return BadRequest(respose);
             }
         }
-        [HttpGet("/bootcampclass/schedule/{batchBootcamp}")]
+        [HttpGet("/bootcampclass/course/schedule/{batchBootcamp}")]
         public IActionResult GetSchedule(int batchBootcamp){
             try{
                 var schedule = _courseService.GetSchedule(batchBootcamp);

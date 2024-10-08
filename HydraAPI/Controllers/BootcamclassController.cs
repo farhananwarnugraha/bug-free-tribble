@@ -212,4 +212,24 @@ public class BootcamclassController : ControllerBase
             return BadRequest(response);
         }
     }
+    [HttpPut("bootcamp/end/{id}")]
+    public IActionResult EndBootcamp(int id, BootcampUpdateDTO bootcampUpdateDTO){
+        try{
+            _bcService.EndBootcamp(id, bootcampUpdateDTO);
+            var response = new ResponseDTO<string>(){
+                status = 200,
+                Message = "Success",
+                Data = "Bootcamp Berhasil diakhiri"
+            };
+            return Ok(response);
+        }
+        catch(Exception){
+            var response = new ResponseDTO<string>(){
+                status = 400,
+                Message = "Failed",
+                Data = "Gagal Mengubah Data"
+            };
+            return BadRequest(response);
+        }
+    }
 }

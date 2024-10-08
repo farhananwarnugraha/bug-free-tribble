@@ -11,10 +11,12 @@ namespace HydraAPI.Bootcamp;
 public class BootcampService
 {
     private readonly IBootcampClass _bootcampClassRepository;
+    private readonly ICourseRepository _courseRepository;
 
-    public BootcampService(IBootcampClass bootcampClassRepository)
+    public BootcampService(IBootcampClass bootcampClassRepository, ICourseRepository courseRepository)
     {
         _bootcampClassRepository = bootcampClassRepository;
+        _courseRepository = courseRepository;
     }
 
     public List<BootcampDTO> Get() => 
@@ -141,7 +143,7 @@ public class BootcampService
     }
 
     public BootcampActiveDetileDTO GetBootcampActiveDetile(int id){
-        var model = _bootcampClassRepository.Get(id);
+        var model = _bootcampClassRepository.GetDetailBootcamp(id);
         return new BootcampActiveDetileDTO(){
             BootcampId = model.Id,
             TrainerId = model.Courses.Select(
@@ -151,5 +153,25 @@ public class BootcampService
             StartDate = model.StartDate,
             EndDate = model.EndDate,
         };
+    }
+
+    public string EndBootcamp(int id, BootcampUpdateDTO bootcampUpdateDTO){
+        bool isActive = false;
+        var model = _courseRepository.GetSchedule(id);
+        foreach (var course in model){
+            if(course.Progress == 2 || course.Progress==1){
+                isActive = true;
+            };
+        }
+        if(isActive){
+            return "Bootcamp Already Active";
+        }else{
+            // selesai
+            var bootcamp = _bootcampClassRepository.Get(id);
+            bootcamp.EndDate = bootcampUpdateDTO.EndDate;
+            bootcamp.Progress = 3;
+            _bootcampClassRepository.Update(bootcamp);
+            return "Success";
+        }
     }
 }

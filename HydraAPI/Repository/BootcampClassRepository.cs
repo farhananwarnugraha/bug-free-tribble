@@ -117,11 +117,14 @@ public class BootcampClassRepository : IBootcampClass
             .ThenInclude(c => c.TrainerSkillDetail)
                 .ThenInclude(tsd => tsd.Skill)
         .Where(
-             bootcamp => bootcamp.Progress == 2 || bootcamp.Courses.Any(c => c.Progress == 2 &&
+            bootcamp => (bootcamp.Id == batchBootcamp) 
+                && 
+                (bootcamp.Progress == 2 || bootcamp.Courses.Any(c => c.Progress == 2 &&
                     (c.Progress !=3 || c.EvaluationDate == null) &&
                     _dbContext.TrainerSkillDetails.Any(
-                        tsd => tsd.TrainerId == c.TrainerId && tsd.SkillId == c.SkillId)) &&
-            bootcamp.Id == batchBootcamp            
+                        tsd => tsd.TrainerId == c.TrainerId && tsd.SkillId == c.SkillId)
+                    )
+                )
         ).FirstOrDefault() ?? throw new Exception("Bootcam Not Found");
     }
 
