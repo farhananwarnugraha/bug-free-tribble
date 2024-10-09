@@ -155,6 +155,28 @@ public class BootcampService
         };
     }
 
+    public BootcampActiveDetileDTO GetScheduleAciveDetail(int batchBootcamp){
+        bool isActive = false;
+        var model = _courseRepository.GetSchedule(batchBootcamp);
+        foreach (var course in model){
+            if(course.Progress == 2 || course.Progress==1){
+                isActive = true;
+            };
+        }
+        if(isActive){
+            var bootcamp = _bootcampClassRepository.Get(batchBootcamp);
+            return new BootcampActiveDetileDTO(){
+                BootcampId = bootcamp.Id,
+                EndDate = bootcamp.EndDate,
+            };
+        }
+        else{
+            return new BootcampActiveDetileDTO(){
+                EndDate = null
+            };
+        }
+    }
+
     public string EndBootcamp(int id, BootcampUpdateDTO bootcampUpdateDTO){
         bool isActive = false;
         var model = _courseRepository.GetSchedule(id);

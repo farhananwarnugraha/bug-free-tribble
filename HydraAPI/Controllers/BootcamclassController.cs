@@ -212,6 +212,25 @@ public class BootcamclassController : ControllerBase
             return BadRequest(response);
         }
     }
+    [HttpGet("bootcamp/active/{batchBootcamp}")]
+    public IActionResult GetAvtiveBootcamp(int batchBootcamp){
+        try{
+            var bootcamp = _bcService.GetScheduleAciveDetail(batchBootcamp);
+            var response = new ResponseDTO<BootcampActiveDetileDTO>(){
+                status = 200,
+                Message = "Success",
+                Data = bootcamp
+            };
+            return Ok(response);
+        }catch(Exception){
+            var response = new ResponseDTO<string>(){
+                status = 400,
+                Message = "Failed",
+                Data = null
+            };
+            return BadRequest(response);
+        }
+    }
     [HttpPut("bootcamp/end/{id}")]
     public IActionResult EndBootcamp(int id, BootcampUpdateDTO bootcampUpdateDTO){
         try{
