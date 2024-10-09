@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Self Project\\AnotherProject\\Cloning\\hydra-api\\HydraAPI\\HydraAPI.csproj": {}
+    "c:\\Self Project\\AnotherProject\\Cloning\\hydra-api\\HydraAPI\\HydraAPI.csproj": {}
   },
   "projects": {
-    "C:\\Self Project\\AnotherProject\\Cloning\\hydra-api\\HydraAPI\\HydraAPI.csproj": {
+    "c:\\Self Project\\AnotherProject\\Cloning\\hydra-api\\HydraAPI\\HydraAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Self Project\\AnotherProject\\Cloning\\hydra-api\\HydraAPI\\HydraAPI.csproj",
+        "projectUniqueName": "c:\\Self Project\\AnotherProject\\Cloning\\hydra-api\\HydraAPI\\HydraAPI.csproj",
         "projectName": "HydraAPI",
-        "projectPath": "C:\\Self Project\\AnotherProject\\Cloning\\hydra-api\\HydraAPI\\HydraAPI.csproj",
+        "projectPath": "c:\\Self Project\\AnotherProject\\Cloning\\hydra-api\\HydraAPI\\HydraAPI.csproj",
         "packagesPath": "C:\\Users\\1961\\.nuget\\packages\\",
-        "outputPath": "C:\\Self Project\\AnotherProject\\Cloning\\hydra-api\\HydraAPI\\obj\\",
+        "outputPath": "c:\\Self Project\\AnotherProject\\Cloning\\hydra-api\\HydraAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\1961\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -48,6 +48,10 @@
             "BCrypt.Net-Next": {
               "target": "Package",
               "version": "[4.0.3, )"
+            },
+            "Isopoh.Cryptography.Argon2": {
+              "target": "Package",
+              "version": "[2.0.0, )"
             },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",

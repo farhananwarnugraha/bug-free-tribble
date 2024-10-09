@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "92C7s5G7ZdU=",
+  "dgSpecHash": "twGFQk8sVsE=",
   "success": true,
-  "projectFilePath": "C:\\Self Project\\AnotherProject\\Cloning\\hydra-api\\HydraAPI\\HydraAPI.csproj",
+  "projectFilePath": "c:\\Self Project\\AnotherProject\\Cloning\\hydra-api\\HydraAPI\\HydraAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\1961\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\1961\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\1961\\.nuget\\packages\\isopoh.cryptography.argon2\\2.0.0\\isopoh.cryptography.argon2.2.0.0.nupkg.sha512",
+    "C:\\Users\\1961\\.nuget\\packages\\isopoh.cryptography.blake2b\\2.0.0\\isopoh.cryptography.blake2b.2.0.0.nupkg.sha512",
+    "C:\\Users\\1961\\.nuget\\packages\\isopoh.cryptography.securearray\\2.0.0\\isopoh.cryptography.securearray.2.0.0.nupkg.sha512",
     "C:\\Users\\1961\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.33\\microsoft.aspnetcore.authentication.jwtbearer.6.0.33.nupkg.sha512",
     "C:\\Users\\1961\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\1961\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.7\\microsoft.data.sqlclient.2.1.7.nupkg.sha512",
