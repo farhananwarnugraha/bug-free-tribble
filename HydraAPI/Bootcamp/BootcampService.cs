@@ -167,7 +167,12 @@ public class BootcampService
             var bootcamp = _bootcampClassRepository.Get(batchBootcamp);
             return new BootcampActiveDetileDTO(){
                 BootcampId = bootcamp.Id,
-                EndDate = bootcamp.EndDate,
+                TrainerId = bootcamp.Courses.Select(
+                    trainer => trainer.TrainerSkillDetail.Trainer.Id).FirstOrDefault(),
+                SkillId = bootcamp.Courses.Select(
+                    course => course.TrainerSkillDetail.Skill.Id).FirstOrDefault()??"Not Set",
+                StartDate = bootcamp.StartDate,
+                EndDate = bootcamp.EndDate 
             };
         }
         else{
@@ -178,22 +183,13 @@ public class BootcampService
     }
 
     public string EndBootcamp(int id, BootcampUpdateDTO bootcampUpdateDTO){
-        bool isActive = false;
-        var model = _courseRepository.GetSchedule(id);
-        foreach (var course in model){
-            if(course.Progress == 2 || course.Progress==1){
-                isActive = true;
-            };
-        }
-        if(isActive){
-            return "Bootcamp Already Active";
-        }else{
-            // selesai
             var bootcamp = _bootcampClassRepository.Get(id);
+            bootcamp.Id = id;
+            bootcamp.Description = bootcampUpdateDTO.Description;
+            bootcamp.StartDate = bootcampUpdateDTO.StartDate;
             bootcamp.EndDate = bootcampUpdateDTO.EndDate;
             bootcamp.Progress = 3;
             _bootcampClassRepository.Update(bootcamp);
             return "Success";
-        }
     }
 }
