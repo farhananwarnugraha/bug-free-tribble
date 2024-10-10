@@ -24,11 +24,12 @@ public class UserRepository : IUserRepository
         return _dbContext.Users.FirstOrDefault(u => u.Username == username)?? throw new Exception("User Not Found");
     }
 
-    public User GetRoleName(string username)
+    public string GetRoleName(string username)
     {
         return _dbContext.Users
         .Include(u => u.Roles)
-        .FirstOrDefault(u => u.Username == username)?? throw new Exception("User Not Found");
+        .Where(u => u.Username == username)
+        .SelectMany(u => u.Roles.Select(r => r.Name)).FirstOrDefault()?? throw new Exception("Role Not Found");
     }
 
     public void Register(User user)

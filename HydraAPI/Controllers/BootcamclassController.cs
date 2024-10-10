@@ -3,6 +3,7 @@ using HydraAPI.Bootcamp;
 using HydraAPI.Bootcamp.DTO;
 using HydraAPI.Shared;
 using HydraAPI.Shared.Enum;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HydraAPI.Controllers;
@@ -19,6 +20,7 @@ public class BootcamclassController : ControllerBase
     }
 
     [HttpGet("bootcampAll")]
+    [Authorize(Roles = "Administrator,Recruiter")]
     public IActionResult Get(){
         try
         {
@@ -42,6 +44,7 @@ public class BootcamclassController : ControllerBase
     }
 
     [HttpGet("bootcamp")]
+    [Authorize(Roles = "Administrator,Recruiter")]
     public IActionResult Get(int pageNumber = (int)Pagination.PAGE_NUMBER, int pageSize = (int)Pagination.PAGE_SIZE, int batchBootcamp = 0, string bootcampName = ""){
         try
         {
@@ -64,6 +67,7 @@ public class BootcamclassController : ControllerBase
         }
     }
     [HttpGet("bootcamp/{bootcampId}")]
+    [Authorize(Roles = "Administrator,Recruiter")]
     public IActionResult Get(int bootcampId){
         try
         {
@@ -85,7 +89,9 @@ public class BootcamclassController : ControllerBase
             return BadRequest(response);
         }
     }
+
     [HttpPost("bootcampclass")]
+    [Authorize(Roles = "Administrator,Recruiter")]
     public IActionResult Insert([FromBody]BootcampInsertDTO request){
         try{
             _bcService.Insert(request);
@@ -106,6 +112,7 @@ public class BootcamclassController : ControllerBase
         }
     } 
     [HttpPut("bootcamp")]
+    [Authorize(Roles = "Administrator,Recruiter")]
     public IActionResult Update([FromBody]BootcampUpdateDTO request){
         try{
             _bcService.Update(request);

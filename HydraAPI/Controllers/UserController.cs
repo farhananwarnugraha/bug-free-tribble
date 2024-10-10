@@ -39,5 +39,26 @@ public class UserController :ControllerBase
         }
     }
 
-    // public IActionResult 
+    [HttpPost("/login")]
+    public IActionResult LoginUser([FromBody] LoginDTO loginDTO){
+        try
+        {
+            var token = _service.LoginUser(loginDTO);
+            var response = new ResponseDTO<LoginResponseDTO>(){
+                status = 200,
+                Message = "Success",
+                Data = token
+            };
+            return Ok(response);
+        }
+        catch (System.Exception e)
+        {
+            var response = new ResponseDTO<string>(){
+                status = 400,
+                Message = "Failed",
+                Data = "Login Gagal, Periksa Kembali Username dan Password Anda " + e.Message 
+            };
+            return BadRequest(response);
+        }
+    }
 }

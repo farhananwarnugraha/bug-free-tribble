@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "twGFQk8sVsE=",
+  "dgSpecHash": "Fwlyni0Oxcs=",
   "success": true,
-  "projectFilePath": "c:\\Self Project\\AnotherProject\\Cloning\\hydra-api\\HydraAPI\\HydraAPI.csproj",
+  "projectFilePath": "C:\\Self Project\\AnotherProject\\Cloning\\hydra-api\\HydraAPI\\HydraAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\1961\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\1961\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

@@ -50,7 +50,7 @@ public class UsersService
             return new LoginResponseDTO(){
                 Username = request.Username,
                 Token = CreateToken(userAcc),
-                Role = _roleRepository.GetRoleByUsername(userAcc.Username).ToString()?? throw new Exception("Role Not Found")
+                Role = _userRepository.GetRoleName(request.Username)
                 
             };
         }else{
@@ -63,12 +63,12 @@ public class UsersService
         // Claims
         List<Claim> claims = new List<Claim>(){
             new Claim(ClaimTypes.NameIdentifier, user.Username),
-            new Claim(ClaimTypes.Role, _roleRepository.GetRoleById(user.Username[0]).Name??"Not Found")
+            new Claim(ClaimTypes.Role, _userRepository.GetRoleName(user.Username))
         };
 
         var key = new SymmetricSecurityKey(
             Encoding.UTF8.GetBytes(
-                _configuration.GetSection("AppSettings:Token").Value ?? "Not Found"
+                _configuration.GetSection("AppSetting:Token").Value ?? "Not Found"
             )
         );
 
