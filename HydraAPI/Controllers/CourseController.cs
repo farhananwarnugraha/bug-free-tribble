@@ -1,6 +1,7 @@
 using HydraAPI.Courses;
 using HydraAPI.Courses.DTO;
 using HydraAPI.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +9,7 @@ namespace HydraAPI.Controllers
 {
     [Route("api/v1")]
     [ApiController]
+    [Authorize(Roles = "Training Manager")]
     public class CourseController : ControllerBase
     {
         private readonly CourseService _courseService;

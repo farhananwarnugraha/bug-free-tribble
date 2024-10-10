@@ -2,12 +2,14 @@
 using HydraAPI.Candidates.DTO;
 using HydraAPI.Shared;
 using HydraAPI.Shared.Enum;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HydraAPI.Controllers
 {
     [Route("api/v1/")]
     [ApiController]
+    [Authorize(Roles = "Training Manager")]
     public class CandidateController : ControllerBase
     {
         private readonly CandidateService _candidateService;

@@ -1,6 +1,7 @@
 using System;
 using HydraAPI.Bootcamp;
 using HydraAPI.Bootcamp.DTO;
+using HydraAPI.Models;
 using HydraAPI.Shared;
 using HydraAPI.Shared.Enum;
 using Microsoft.AspNetCore.Authorization;
@@ -132,6 +133,7 @@ public class BootcamclassController : ControllerBase
         }
     }
     [HttpGet("bootcamp/planed")]
+    [Authorize(Roles ="Training Manager")]
     public IActionResult GetPlanedBootcamp(int pageNumber = (int)Pagination.PAGE_NUMBER, int pageSize = (int)Pagination.PAGE_SIZE, int batchBootcamp = 0, string bootcampName = ""){
         try
         {
@@ -154,6 +156,7 @@ public class BootcamclassController : ControllerBase
         }
     }
     [HttpGet("bootcamp/active")]
+    [Authorize(Roles ="Training Manager")]
     public IActionResult GetActiveBootcamp(int pageNumber = (int)Pagination.PAGE_NUMBER, int pageSize = (int)Pagination.PAGE_SIZE, int batchBootcamp = 0, string bootcampName = ""){
         try
         {
@@ -176,6 +179,7 @@ public class BootcamclassController : ControllerBase
         }
     }
     [HttpGet("bootcamp/completed")]
+    [Authorize(Roles ="Training Manager")]
     public IActionResult GetCompletedBootcamp(int pageNumber = (int)Pagination.PAGE_NUMBER, int pageSize = (int)Pagination.PAGE_SIZE, int batchBootcamp = 0, string bootcampName = ""){
         try
         {
@@ -198,6 +202,7 @@ public class BootcamclassController : ControllerBase
         }
     }
     [HttpGet("bootcamp/{bootcampId}/detail")]
+    [Authorize(Roles ="Training Manager")]
     public IActionResult GetDetailBootcamp(int bootcampId){
         try
         {
@@ -220,6 +225,7 @@ public class BootcamclassController : ControllerBase
         }
     }
     [HttpGet("bootcamp/active/{batchBootcamp}")]
+    [Authorize(Roles ="Training Manager")]
     public IActionResult GetAvtiveBootcamp(int batchBootcamp){
         try{
             var bootcamp = _bcService.GetScheduleAciveDetail(batchBootcamp);
@@ -239,6 +245,7 @@ public class BootcamclassController : ControllerBase
         }
     }
     [HttpPut("bootcamp/end/{id}")]
+    [Authorize(Roles ="Training Manager")]
     public IActionResult EndBootcamp(int id, BootcampUpdateDTO bootcampUpdateDTO){
         try{
             _bcService.EndBootcamp(id, bootcampUpdateDTO);
