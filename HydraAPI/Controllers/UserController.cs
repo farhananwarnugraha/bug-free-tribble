@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HydraAPI.Controllers;
 
-[Route("api/v1/auth")]
+[Route("api/v1")]
 [ApiController]
 public class UserController :ControllerBase
 {
@@ -16,7 +16,7 @@ public class UserController :ControllerBase
     {
         _service = service;
     }
-    [HttpPost("/register")]
+    [HttpPost("register")]
     public IActionResult RegisterUser([FromBody] ResgisterDTO registerDTO){
         try
         {
@@ -39,7 +39,7 @@ public class UserController :ControllerBase
         }
     }
 
-    [HttpPost("/login")]
+    [HttpPost("login")]
     public IActionResult LoginUser([FromBody] LoginDTO loginDTO){
         try
         {
