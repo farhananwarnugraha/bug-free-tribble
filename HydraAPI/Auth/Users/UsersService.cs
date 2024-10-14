@@ -82,4 +82,14 @@ public class UsersService
 
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
+
+    // getCurrent User
+    public LoginResponseDTO GetCurrentUser(string username){
+        var user = _userRepository.GetByUsername(username) ?? throw new Exception("User Not Found");
+        return new LoginResponseDTO(){
+          Username = user.Username,
+          Token = CreateToken(user),
+          Role = _userRepository.GetRoleName(username)  
+        };
+    }
 }

@@ -1,12 +1,14 @@
 using System;
+using System.Security.Claims;
 using HydraAPI.Auth.Users;
 using HydraAPI.Auth.Users.DTO;
 using HydraAPI.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace HydraAPI.Controllers;
 
-[Route("api/v1")]
+[Route("api/v1/auth")]
 [ApiController]
 public class UserController :ControllerBase
 {
@@ -59,6 +61,24 @@ public class UserController :ControllerBase
                 Data = "Login Gagal, Periksa Kembali Username dan Password Anda " + e.Message 
             };
             return BadRequest(response);
+        }
+    }
+
+    [HttpGet()]
+    [Authorize()]
+    public IActionResult GetCurrentUser(){
+        try{
+            var username = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var user = _service.GetCurrentUser(username);
+            var response = new ResponseDTO<LoginResponseDTO>(){
+                status = 200,
+                Message = "Success",
+                Data = user
+            };
+            return Ok(response);
+        }
+        catch(System.Exception e){
+            return BadRequest(e.Message);
         }
     }
 }
