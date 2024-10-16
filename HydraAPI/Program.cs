@@ -70,7 +70,12 @@ builder.Services.AddSwaggerGen(options =>
 
 
 //COORS
-
+builder.Services.AddCors(options => {
+    options.AddPolicy("AllowAngularApp",
+        builder => {
+            builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
+        });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -85,5 +90,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-
+// Enable CORS
+app.UseCors("AllowAngularApp");
 app.Run();

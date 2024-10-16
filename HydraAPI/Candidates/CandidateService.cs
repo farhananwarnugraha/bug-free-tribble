@@ -36,6 +36,7 @@ namespace HydraAPI.Candidates
             .Select(
                 candidate => new CandidateDTO(){
                     CandidateId = candidate.Id,
+                    BatchBootcamp = candidate.BootcampClassId,
                     FullName = candidate.FirstName + " " + candidate.LastName,
                     ContactCandidate = candidate.PhoneNumber,
                     Domicile = candidate.Domicile,

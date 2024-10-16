@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HydraAPI.Controllers;
 
-[Route("api/v1/auth")]
+[Route("api/v1/")]
 [ApiController]
 public class UserController :ControllerBase
 {
@@ -64,7 +64,7 @@ public class UserController :ControllerBase
         }
     }
 
-    [HttpGet()]
+    [HttpGet("getCurrentUser")]
     [Authorize()]
     public IActionResult GetCurrentUser(){
         try{
