@@ -8,7 +8,7 @@
         public int TotalPage {
             get
             {
-                return (int)Math.Ceiling((double)PageNumber/PageSize);
+                return (int)Math.Ceiling((double)TotalRows/PageSize);
             }
         }
     }
