@@ -114,8 +114,15 @@ public class BootcamclassController : ControllerBase
     } 
     [HttpPut("bootcamp")]
     [Authorize(Roles = "Administrator,Recruiter")]
-    public IActionResult Update([FromBody]BootcampUpdateDTO request){
+    public IActionResult Update( [FromBody]BootcampUpdateDTO request){
         try{
+            // if(bootcampId != request.BootcampId){
+            //     return BadRequest(new ResponseDTO<string>(){
+            //         status = 400,
+            //         Message = "Failed",
+            //         Data = "Gagal melakukan update data"
+            //     });
+            // } 
             _bcService.Update(request);
             var response = new ResponseDTO<string>(){
                 status = 200,
