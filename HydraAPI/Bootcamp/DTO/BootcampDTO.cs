@@ -11,4 +11,9 @@ public class BootcampDTO
     public int? TotalCandidates { get; set; }
     public string? TrainerName { get; set; }
     public string? CourseName { get; set; }
+
+    // public static implicit operator BootcampDTO(List<BootcampDTO> v)
+    // {
+    //     throw new NotImplementedException();
+    // }
 }

@@ -97,6 +97,17 @@ public class BootcampService
         };
     }
 
+    public List<BootcampDTO> GetBootcampPlanned() =>
+        _bootcampClassRepository.GetBootcampPlaned()
+        .Select(
+            bcPlanned => new BootcampDTO(){
+                BootcampId = bcPlanned.Id,
+                Description = bcPlanned.Description??"Not Set",
+                StartDate = bcPlanned.StartDate.ToString("yyyy-MM-dd"),
+                EndDate = bcPlanned.EndDate?.ToString("yyyy-MM-dd"),
+            }
+        ).ToList();
+
     public BootcampPlanedDTO GetBootcampActive(int pageNumber, int pageSize, int batchBootcamp, string bootcampName){
         var model = _bootcampClassRepository.GetBootcampActive(pageNumber, pageSize, batchBootcamp, bootcampName)
             .Select(

@@ -106,6 +106,14 @@ public class BootcampClassRepository : IBootcampClass
         .Take(pageSize)
         .ToList();
     }
+
+    public List<BootcampClass> GetBootcampPlaned()
+    {
+        return _dbContext.BootcampClasses
+            .Where(bootcamp => bootcamp.Progress == 1)
+            .ToList();
+    }
+
     // get detail bootcamp active
     public BootcampClass GetDetailBootcamp(int batchBootcamp)
     {

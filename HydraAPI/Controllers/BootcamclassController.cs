@@ -116,13 +116,6 @@ public class BootcamclassController : ControllerBase
     [Authorize(Roles = "Administrator,Recruiter")]
     public IActionResult Update( [FromBody]BootcampUpdateDTO request){
         try{
-            // if(bootcampId != request.BootcampId){
-            //     return BadRequest(new ResponseDTO<string>(){
-            //         status = 400,
-            //         Message = "Failed",
-            //         Data = "Gagal melakukan update data"
-            //     });
-            // } 
             _bcService.Update(request);
             var response = new ResponseDTO<string>(){
                 status = 200,
@@ -158,6 +151,29 @@ public class BootcamclassController : ControllerBase
                 status = 400,
                 Message = "Failed",
                 Data = null
+            };
+            return BadRequest(response);
+        }
+    }
+
+    [HttpGet("bootcamp/planedall")]
+    [Authorize(Roles ="Adminstration, Recruiter")]
+    public IActionResult GetBootcampPlanedAll(){
+        try{
+            var bcp = _bcService.GetBootcampPlanned();
+            var response = new ResponseDTO<List<BootcampDTO>>{
+                status = 200,
+                Message = "Success",
+                Data = bcp
+            };
+            return Ok(response);
+        }
+        catch (System.Exception){
+            var response = new ResponseDTO<string>{
+                status = 400,
+                Message = "Failed",
+                Data = null
+
             };
             return BadRequest(response);
         }
