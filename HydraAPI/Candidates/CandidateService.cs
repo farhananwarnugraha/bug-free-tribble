@@ -60,10 +60,12 @@ namespace HydraAPI.Candidates
                 FirstName = request.FirstName,
                 LastName = request.LastName,
                 Gender = request.Gender,
-                BirthDate = request.BirthDate,
+                BirthDate = request.BirthDate, 
                 Address = request.Address,
                 Domicile = request.Domicile,
-                PhoneNumber = request.PhoneNumber
+                PhoneNumber = request.PhoneNumber,
+                HasPassed = false,
+                IsActive = true
             });
 
         public CandidateUpdateDTO GetById(int candidateId){

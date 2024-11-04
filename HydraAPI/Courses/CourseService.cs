@@ -19,7 +19,7 @@ public class CourseService
     public void Insert(int bootcampId, AddCourseBootcampDTO request){
         var detailBootcampActive = _bootcampClassRepository.Get(bootcampId);
         var course = new Course{
-            Id = "BC/00"+detailBootcampActive.Id.ToString()+"/"+request.SkillId,
+            Id = "BC/"+detailBootcampActive.Id.ToString("000")+"/"+request.SkillId,
             BootcampClassId = detailBootcampActive.Id,
             TrainerId = request.TrainerId,
             SkillId = request.SkillId,
