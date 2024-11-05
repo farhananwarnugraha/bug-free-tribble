@@ -68,6 +68,26 @@ namespace HydraAPI.Candidates
                 IsActive = true
             });
 
+        public void Insert_condition(CandidateReqDTO request){
+            var model = _candidateRepository.Get(request.BootcampClass);
+            if(model.BootcampClassId == 2 || model.BootcampClassId == 3){
+                _candidateRepository.Insert(new Candidate{
+                    BootcampClassId = request.BootcampClass,
+                    FirstName = request.FirstName,
+                    LastName = request.LastName,
+                    Gender = request.Gender,
+                    BirthDate = request.BirthDate, 
+                    Address = request.Address,
+                    Domicile = request.Domicile,
+                    PhoneNumber = request.PhoneNumber,
+                    HasPassed = false,
+                    IsActive = true
+                });
+            }else{
+                return;
+            }
+        }
+
         public CandidateUpdateDTO GetById(int candidateId){
             var model = _candidateRepository.Get(candidateId);
             return new CandidateUpdateDTO(){

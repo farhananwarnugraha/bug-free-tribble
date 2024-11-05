@@ -57,27 +57,46 @@ namespace HydraAPI.Controllers
         }
         [HttpPost("candidate")]
         public IActionResult Insert(CandidateReqDTO request){
-            try
-            {
+            if(request.BootcampClass == 2 || request.BootcampClass == 3){
+                var response = new ResponseDTO<string>()
+                {
+                    status = 400,
+                    Message = "Failed",
+                    Data = "Bootcamp Sedang Berjalan atau sudah selesai"
+                };
+                return BadRequest(response);
+                
+            }else{
                 _candidateService.Insert(request);
                 var response = new ResponseDTO<string>()
                 {
                     status = 200,
                     Message = "Success",
-                    Data = "Berhasil Menambahkan Dta"
+                    Data = "Berhasil Menambahkan Data"
                 };
                 return Ok(response);
             }
-            catch (Exception)
-            {
-                var response = new ResponseDTO<string>()
-                {
-                    status = 400,
-                    Message = "Failed",
-                    Data = "Gagal Menambahkan Data"
-                };
-                return BadRequest(response);
-            }
+            // try
+            // {
+            //     _candidateService.Insert(request);
+            //     var response = new ResponseDTO<string>()
+            //     {
+            //         status = 200,
+            //         Message = "Success",
+            //         Data = "Berhasil Menambahkan Dta"
+            //     };
+            //     return Ok(response);
+            // }
+            // catch (Exception)
+            // {
+            //     var response = new ResponseDTO<string>()
+            //     {
+            //         status = 400,
+            //         Message = "Failed",
+            //         Data = "Gagal Menambahkan Data"
+            //     };
+            //     return BadRequest(response);
+            // }
         }
         [HttpGet("candidate/{candidateId}")]
         public IActionResult Get(int candidateId){
