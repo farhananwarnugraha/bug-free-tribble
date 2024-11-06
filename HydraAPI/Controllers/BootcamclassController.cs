@@ -21,7 +21,7 @@ public class BootcamclassController : ControllerBase
     }
 
     [HttpGet("bootcampAll")]
-    [Authorize(Roles = "Administrator,Recruiter")]
+    [Authorize(Roles = "TrainingManager,Administrator,Recruiter")]
     public IActionResult Get(){
         try
         {
@@ -45,7 +45,7 @@ public class BootcamclassController : ControllerBase
     }
 
     [HttpGet("bootcamp")]
-    [Authorize(Roles = "Administrator,Recruiter")]
+    [Authorize(Roles = "Administrator,Recruiter,TrainingManager")]
     public IActionResult Get(int pageNumber = (int)Pagination.PAGE_NUMBER, int pageSize = (int)Pagination.PAGE_SIZE, int batchBootcamp = 0, string bootcampName = ""){
         try
         {
