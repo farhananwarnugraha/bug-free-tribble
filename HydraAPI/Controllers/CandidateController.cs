@@ -9,7 +9,7 @@ namespace HydraAPI.Controllers
 {
     [Route("api/v1/")]
     [ApiController]
-    [Authorize(Roles = "TrainingManager,Recruiter")]
+    [Authorize(Roles = "TrainingManager,Recruiter,Administrator")]
     public class CandidateController : ControllerBase
     {
         private readonly CandidateService _candidateService;
