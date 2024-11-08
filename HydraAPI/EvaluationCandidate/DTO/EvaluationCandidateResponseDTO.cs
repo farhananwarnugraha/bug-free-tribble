@@ -8,5 +8,5 @@ public class EvaluationCandidateResponseDTO
     public List<EvaluationCandidateDTO>? EvaluationCandidates { get; set; }
     public PaginationDTO? Paginations { get; set; }
     public string? FullName { get; set; }
-    public string? CourseName { get; set; }
+    // public string? CourseName { get; set; }
 }

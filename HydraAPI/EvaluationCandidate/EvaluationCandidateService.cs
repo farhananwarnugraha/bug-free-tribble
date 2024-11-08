@@ -14,13 +14,13 @@ public class EvaluationCandidateService
         _evaluationCandidateRepository = evaluationCandidateRepository;
     }
 
-    public EvaluationCandidateResponseDTO GetEvaluation(int pageNumber, int pageSize, string fullName, string courseName){
-        var data = _evaluationCandidateRepository.GetCandidateEavaluations(pageNumber, pageSize, fullName, courseName)
+    public EvaluationCandidateResponseDTO GetEvaluation(int pageNumber, int pageSize, string fullName){
+        var data = _evaluationCandidateRepository.GetCandidateEavaluations(pageNumber, pageSize, fullName)
                     .Select(ec => new EvaluationCandidateDTO{
                         FullName = ec.Candidate.FirstName + " " + ec.Candidate.LastName,
                         CourseName = ec.Course.TrainerSkillDetail.Skill.Name,
                         Mark = ec.Mark,
-                        IsPassed = ec.Passed
+                        IsPassed = ec.Passed == true ? "Passed" : "Failed"
                     }).ToList();
 
         return new EvaluationCandidateResponseDTO(){
@@ -28,10 +28,9 @@ public class EvaluationCandidateService
             Paginations = new PaginationDTO(){
                 PageNumber = pageNumber,
                 PageSize = pageSize,
-                TotalRows = _evaluationCandidateRepository.Count(fullName, courseName)
+                TotalRows = _evaluationCandidateRepository.Count(fullName)
             },
             FullName = fullName,
-            CourseName = courseName
         };
     }
 }

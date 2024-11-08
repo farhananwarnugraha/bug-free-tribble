@@ -2,6 +2,7 @@ using HydraAPI.Auth.Users;
 using HydraAPI.Bootcamp;
 using HydraAPI.Candidates;
 using HydraAPI.Courses;
+using HydraAPI.EvaluationCandidate;
 using HydraAPI.Interfaces;
 using HydraAPI.Models;
 using HydraAPI.Repository;
@@ -36,6 +37,8 @@ builder.Services.AddScoped<CourseService>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<UsersService>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+builder.Services.AddScoped<IEvaluationCandidate, EvaluationCandidateRepository>();
+builder.Services.AddScoped<EvaluationCandidateService>();
 builder.Services.AddControllers();
 
 //setting authentication 
