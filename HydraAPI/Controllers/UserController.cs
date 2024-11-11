@@ -69,7 +69,7 @@ public class UserController :ControllerBase
     public IActionResult GetCurrentUser(){
         try{
             var username = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var user = _service.GetCurrentUser(username);
+            var user = _service.GetCurrentUser(username??"");
             var response = new ResponseDTO<LoginResponseDTO>(){
                 status = 200,
                 Message = "Success",

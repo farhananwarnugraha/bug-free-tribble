@@ -133,7 +133,7 @@ public class BootcamclassController : ControllerBase
         }
     }
     [HttpGet("bootcamp/planed")]
-    [Authorize(Roles ="Training Manager")]
+    [Authorize(Roles ="TrainingManager")]
     public IActionResult GetPlanedBootcamp(int pageNumber = (int)Pagination.PAGE_NUMBER, int pageSize = (int)Pagination.PAGE_SIZE, int batchBootcamp = 0, string bootcampName = ""){
         try
         {
@@ -179,7 +179,7 @@ public class BootcamclassController : ControllerBase
         }
     }
     [HttpGet("bootcamp/active")]
-    [Authorize(Roles ="Training Manager")]
+    [Authorize(Roles ="TrainingManager")]
     public IActionResult GetActiveBootcamp(int pageNumber = (int)Pagination.PAGE_NUMBER, int pageSize = (int)Pagination.PAGE_SIZE, int batchBootcamp = 0, string bootcampName = ""){
         try
         {
@@ -202,7 +202,7 @@ public class BootcamclassController : ControllerBase
         }
     }
     [HttpGet("bootcamp/completed")]
-    [Authorize(Roles ="Training Manager")]
+    [Authorize(Roles ="TrainingManager")]
     public IActionResult GetCompletedBootcamp(int pageNumber = (int)Pagination.PAGE_NUMBER, int pageSize = (int)Pagination.PAGE_SIZE, int batchBootcamp = 0, string bootcampName = ""){
         try
         {
