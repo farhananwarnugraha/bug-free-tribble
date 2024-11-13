@@ -92,7 +92,7 @@ public class BootcampService
             Pagination = new PaginationDTO(){
                 PageNumber = pageNumber,
                 PageSize = pageSize,
-                TotalRows = _bootcampClassRepository.Count(batchBootcamp, bootcampName)
+                TotalRows = _bootcampClassRepository.CountBootcampPlaned(batchBootcamp, bootcampName)
             }
         };
     }
@@ -116,8 +116,12 @@ public class BootcampService
                  Description = bootcamp.Description??"Not Set",
                  StartDate = bootcamp.StartDate.ToString("yyyy-MM-dd"),
                  EndDate = bootcamp.EndDate?.ToString("yyyy-MM-dd"),
-                 TrainerName = bootcamp.Courses.Select(
-                    course => course.TrainerSkillDetail.Trainer.FirstName + " " + course.TrainerSkillDetail.Trainer.LastName).FirstOrDefault()??"Not Set",
+                 TrainerName = bootcamp.Courses.Select(C => C.Progress == 2).FirstOrDefault() ? 
+                    bootcamp.Courses.Select(C => C.TrainerSkillDetail.Trainer.FirstName + " " + C.TrainerSkillDetail.Trainer.LastName ).FirstOrDefault() + " (Active) " : 
+                    bootcamp.Courses.Select(C => C.Progress == 3).FirstOrDefault() ? 
+                    "Last Trainer By " + bootcamp.Courses.Select(C => C.TrainerSkillDetail.Trainer.FirstName + " " + C.TrainerSkillDetail.Trainer.LastName ).FirstOrDefault() : "Not Set",
+                //  TrainerName = bootcamp.Courses.Select(
+                //     course => course.TrainerSkillDetail.Trainer.FirstName + " " + course.TrainerSkillDetail.Trainer.LastName).FirstOrDefault()??"Not Set",
                  CourseName = bootcamp.Courses.Select(
                     course => course.TrainerSkillDetail.Skill.Name).FirstOrDefault()??"Not Set",               
                 }
@@ -127,7 +131,7 @@ public class BootcampService
             Pagination = new PaginationDTO(){
                 PageNumber = pageNumber,
                 PageSize = pageSize,
-                TotalRows = _bootcampClassRepository.Count(batchBootcamp, bootcampName)
+                TotalRows = _bootcampClassRepository.CountBootcampActive(batchBootcamp, bootcampName)
             }
         };
     }
@@ -148,7 +152,7 @@ public class BootcampService
             Pagination = new PaginationDTO(){
                 PageNumber = pageNumber,
                 PageSize = pageSize,
-                TotalRows = _bootcampClassRepository.Count(batchBootcamp, bootcampName)
+                TotalRows = _bootcampClassRepository.CountBootcampCompleted(batchBootcamp, bootcampName)
             }
         };
     }

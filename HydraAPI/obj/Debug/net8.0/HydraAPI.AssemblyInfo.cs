@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HydraAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+890e4f2f1b33c5bd7a168fc5d9871fa8637fc849")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4204c0e890b54053ffef739c2d7dd379cd4dcafc")]
 [assembly: System.Reflection.AssemblyProductAttribute("HydraAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HydraAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

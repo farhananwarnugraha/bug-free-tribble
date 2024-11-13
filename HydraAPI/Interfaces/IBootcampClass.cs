@@ -14,6 +14,9 @@ public interface IBootcampClass
     BootcampClass GetDetailBootcamp(int batchBootcamp);
     BootcampClass Get(int bootcampId);
     int Count(int batchBootcamp, string bootcampName);
+    int CountBootcampActive(int batchBootcamp, string bootcampDescription);
+    int CountBootcampPlaned(int batchBootacamp, string bootcampDescription);
+    int CountBootcampCompleted(int batchBootacamp, string bootcampDescription);
     void Insert(BootcampClass bootcampClass);
     void Update(BootcampClass bootcampClass);
     void Delete(int id);

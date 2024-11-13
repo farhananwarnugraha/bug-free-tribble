@@ -225,7 +225,7 @@ public class BootcamclassController : ControllerBase
         }
     }
     [HttpGet("bootcamp/{bootcampId}/detail")]
-    [Authorize(Roles ="Training Manager")]
+    [Authorize(Roles ="TrainingManager")]
     public IActionResult GetDetailBootcamp(int bootcampId){
         try
         {
@@ -248,7 +248,7 @@ public class BootcamclassController : ControllerBase
         }
     }
     [HttpGet("bootcamp/active/{batchBootcamp}")]
-    [Authorize(Roles ="Training Manager")]
+    [Authorize(Roles ="TrainingManager")]
     public IActionResult GetAvtiveBootcamp(int batchBootcamp){
         try{
             var bootcamp = _bcService.GetScheduleAciveDetail(batchBootcamp);
