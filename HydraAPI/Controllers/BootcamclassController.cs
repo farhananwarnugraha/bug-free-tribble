@@ -242,7 +242,7 @@ public class BootcamclassController : ControllerBase
             var response = new ResponseDTO<string>(){
                 status = 400,
                 Message = "Failed",
-                Data = null
+                Data = "Bootcamp still has running classes or planned classes"
             };
             return BadRequest(response);
         }
@@ -268,10 +268,10 @@ public class BootcamclassController : ControllerBase
         }
     }
     [HttpPut("bootcamp/end/{id}")]
-    [Authorize(Roles ="Training Manager")]
-    public IActionResult EndBootcamp(int id, BootcampUpdateDTO bootcampUpdateDTO){
+    [Authorize(Roles ="TrainingManager")]
+    public IActionResult EndBootcamp(int id, EndBootcampDTO endBootcamp){
         try{
-            _bcService.EndBootcamp(id, bootcampUpdateDTO);
+            _bcService.EndBootcamp(id, endBootcamp);
             var response = new ResponseDTO<string>(){
                 status = 200,
                 Message = "Success",
@@ -287,5 +287,49 @@ public class BootcamclassController : ControllerBase
             };
             return BadRequest(response);
         }
+    }
+
+    [HttpPut("bootcamp/activate/{id}")]
+    [Authorize(Roles ="TrainingManager")]
+    public IActionResult ActivateBootcamp(int id){
+        try{
+            _bcService.ActivedBootcamp(id);
+            var response = new ResponseDTO<string>(){
+                status = 200,
+                Message = "Success",
+                Data = "Bootcamp Berhasil diaktifkan"
+            };
+            return Ok(response);
+        }
+        catch(Exception){
+            var response = new ResponseDTO<string>(){
+                status = 400,
+                Message = "Failed",
+                Data = "Gagal Mengaktifkan Bootcamp"
+            };
+            return BadRequest(response);
+        }
+    }
+
+    [HttpPut("bootcamp/deactivate/{id}")]
+    [Authorize(Roles ="TrainingManager")]
+    public IActionResult DeadActivedBootcamp(int id){
+        try{
+            _bcService.DeadActivedBootcamp(id);
+            var response = new ResponseDTO<string>(){
+                status = 200,
+                Message = "Success",
+                Data = "Bootcamp Berhasil dinonaktifkan"
+            };
+            return Ok(response);
+        }
+        catch(Exception){
+            var response = new ResponseDTO<string>(){
+                status = 400,
+                Message = "Failed",
+                Data = "Gagal Menonaktifkan Bootcamp"
+            };
+            return BadRequest(response);
+        }   
     }
 }

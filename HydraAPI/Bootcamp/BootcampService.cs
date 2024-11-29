@@ -119,7 +119,7 @@ public class BootcampService
                  TrainerName = bootcamp.Courses.Select(C => C.Progress == 2).FirstOrDefault() ? 
                     bootcamp.Courses.Select(C => C.TrainerSkillDetail.Trainer.FirstName + " " + C.TrainerSkillDetail.Trainer.LastName ).FirstOrDefault() + " (Active) " : 
                     bootcamp.Courses.Select(C => C.Progress == 3).FirstOrDefault() ? 
-                    "Last Trainer By " + bootcamp.Courses.Select(C => C.TrainerSkillDetail.Trainer.FirstName + " " + C.TrainerSkillDetail.Trainer.LastName ).FirstOrDefault() : "Not Set",
+                    "Last Trainer By " + bootcamp.Courses.Select(C => C.TrainerSkillDetail.Trainer.FirstName + " " + C.TrainerSkillDetail.Trainer.LastName ).FirstOrDefault() :  bootcamp.Courses.Select(C => C.TrainerSkillDetail.Trainer.FirstName + " " + C.TrainerSkillDetail.Trainer.LastName ).FirstOrDefault(),
                 //  TrainerName = bootcamp.Courses.Select(
                 //     course => course.TrainerSkillDetail.Trainer.FirstName + " " + course.TrainerSkillDetail.Trainer.LastName).FirstOrDefault()??"Not Set",
                  CourseName = bootcamp.Courses.Select(
@@ -161,10 +161,10 @@ public class BootcampService
         var model = _bootcampClassRepository.GetDetailBootcamp(id);
         return new BootcampActiveDetileDTO(){
             BootcampId = model.Id,
-            TrainerId = model.Courses.Select(
-                trainer => trainer.TrainerSkillDetail.Trainer.Id).FirstOrDefault(),
-            SkillId = model.Courses.Select(
-                course => course.TrainerSkillDetail.Skill.Id).FirstOrDefault()??"Not Set",
+            // TrainerId = model.Courses.Select(
+            //     trainer => trainer.TrainerSkillDetail.Trainer.Id).FirstOrDefault(),
+            // SkillId = model.Courses.Select(
+            //     course => course.TrainerSkillDetail.Skill.Id).FirstOrDefault()??"Not Set",
             StartDate = model.StartDate,
             EndDate = model.EndDate,
         };
@@ -197,14 +197,29 @@ public class BootcampService
         }
     }
 
-    public string EndBootcamp(int id, BootcampUpdateDTO bootcampUpdateDTO){
+    public string EndBootcamp(int id, EndBootcampDTO endBootcamp){
             var bootcamp = _bootcampClassRepository.Get(id);
             bootcamp.Id = id;
-            bootcamp.Description = bootcampUpdateDTO.Description;
-            bootcamp.StartDate = bootcampUpdateDTO.StartDate;
-            bootcamp.EndDate = bootcampUpdateDTO.EndDate;
+            bootcamp.EndDate = endBootcamp.EndDate;
             bootcamp.Progress = 3;
             _bootcampClassRepository.Update(bootcamp);
             return "Success";
+    }
+
+    public void ActivedBootcamp(int id){
+        var bootcamp = _bootcampClassRepository.Get(id);
+        var totalCandidate = bootcamp.Candidates.Count();
+        if(totalCandidate > 0){
+            bootcamp.Progress = 2;
+            _bootcampClassRepository.Update(bootcamp);
+        }else{
+        
+        }
+    }
+
+    public void DeadActivedBootcamp(int id){
+        var bootcamp = _bootcampClassRepository.Get(id);
+        bootcamp.Progress = 0;
+        _bootcampClassRepository.Update(bootcamp);
     }
 }

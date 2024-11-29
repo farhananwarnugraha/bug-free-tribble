@@ -7,9 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HydraAPI.Controllers
 {
-    [Route("api/v1")]
+    [Route("api/v1/")]
     [ApiController]
-    [Authorize(Roles = "Training Manager")]
+    [Authorize(Roles = "TrainingManager")]
     public class CourseController : ControllerBase
     {
         private readonly CourseService _courseService;
@@ -19,7 +19,7 @@ namespace HydraAPI.Controllers
             _courseService = courseService;
         }
 
-        [HttpPost("/bootcampclass/course/{batchBootcamp}")]
+        [HttpPost("bootcampclass/course/{batchBootcamp}")]
         public IActionResult AddCourseBootcamp(int batchBootcamp, [FromBody] AddCourseBootcampDTO request){
             try{
                 _courseService.Insert(batchBootcamp,request);
@@ -39,7 +39,7 @@ namespace HydraAPI.Controllers
                 return BadRequest(respose);
             }
         }
-        [HttpGet("/bootcampclass/course/schedule/{batchBootcamp}")]
+        [HttpGet("bootcampclass/course/schedule/{batchBootcamp}")]
         public IActionResult GetSchedule(int batchBootcamp){
             try{
                 var schedule = _courseService.GetSchedule(batchBootcamp);
@@ -58,6 +58,28 @@ namespace HydraAPI.Controllers
                 };
                 return BadRequest(respose);
             }
+        }
+
+        [HttpPut("bootcampclass/course/{courseId}")]
+        public IActionResult UpdateCourse(string courseId){
+            // courseId = courseId.Replace("%2F", "/");
+            // try{
+               _courseService.UpdateProgress(courseId);
+                var respose = new ResponseDTO<string>(){
+                    status = 200,
+                    Message = "Success",
+                    Data = "Berhasil Mengubah Data"
+                };
+                return Ok(respose);
+            // }
+            // catch{
+            //     var respose = new ResponseDTO<string>(){
+            //         status = 400,
+            //         Message = "Failed",
+            //         Data = "Gagal Mengubah Data"
+            //     };
+            //     return BadRequest(respose);
+            // }
         }
     }
 }

@@ -1,5 +1,7 @@
-﻿using HydraAPI.Interfaces;
+﻿using BCrypt.Net;
+using HydraAPI.Interfaces;
 using HydraAPI.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata.Ecma335;
 
 namespace HydraAPI.Repository
@@ -57,6 +59,15 @@ namespace HydraAPI.Repository
         public Candidate Get(int candidateId)
         {
             return _candidateContext.Candidates.Find(candidateId) ?? throw new Exception("Candidate Not Found");
+        }
+
+        public List<Candidate> GetCandidate(string courseId, int batchBootcamp)
+        {
+            return _candidateContext.Candidates
+                .Include(c => c.BootcampClass)
+                    .ThenInclude(bc => bc.Courses)
+                .Where(c => c.BootcampClassId == batchBootcamp && c.BootcampClass.Courses.Any(c => c.Id == courseId))
+                .ToList();
         }
 
         public Candidate Insert(Candidate candidate)

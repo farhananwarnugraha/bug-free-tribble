@@ -9,6 +9,7 @@ public interface IBootcampClass
     List<BootcampClass> Get(int pageNumber, int pageSize, int batchBootcamp, string bootcampName);
     List<BootcampClass> BetBootcampPlaned(int pageNumber, int pageSize, int batchBootcamp, string bootcampName);
     List<BootcampClass> GetBootcampPlaned();
+    BootcampClass GetBootcampPlaned(int batchBootcamp);
     List<BootcampClass> GetBootcampActive(int pageNumber, int pageSize, int batchBootcamp, string bootcampName);
     List<BootcampClass> GetBootcampCompleted(int pageNumber, int pageSize, int batchBootcamp, string bootcampName);
     BootcampClass GetDetailBootcamp(int batchBootcamp);

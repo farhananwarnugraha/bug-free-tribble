@@ -6,6 +6,8 @@ using HydraAPI.EvaluationCandidate;
 using HydraAPI.Interfaces;
 using HydraAPI.Models;
 using HydraAPI.Repository;
+using HydraAPI.Skills;
+using HydraAPI.Trainers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,7 +31,9 @@ builder.Services.AddScoped<CandidateService>();
 builder.Services.AddScoped<IBootcampClass, BootcampClassRepository>();
 builder.Services.AddScoped<BootcampService>();
 builder.Services.AddScoped<ISkillRepository, SkillRepository>();
+builder.Services.AddScoped<SkillService>();
 builder.Services.AddScoped<ITrainerRepository, TrainerRepository>();
+builder.Services.AddScoped<TrainerService>();
 builder.Services.AddScoped<ITrainerSkillDetileRepository, TrainerSkillDetailRepository>();
 builder.Services.AddScoped<ICandidateEvaluationRepository, CandidateEvaluationRepository>();
 builder.Services.AddScoped<ICourseRepository, CourseClassRepository>();
@@ -76,7 +80,9 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddCors(options => {
     options.AddPolicy("AllowAngularApp",
         builder => {
-            builder.WithOrigins("http://localhost:4200").AllowAnyHeader().AllowAnyMethod();
+            builder.WithOrigins("http://localhost:4200")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
         });
 });
 var app = builder.Build();

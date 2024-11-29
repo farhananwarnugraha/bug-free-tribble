@@ -32,7 +32,7 @@ public class CourseClassRepository : ICourseRepository
 
     public Course GetCourse(string courseId)
     {
-        throw new NotImplementedException();
+        return _dbContext.Courses.FirstOrDefault(c => c.Id == courseId) ?? throw new Exception("Course Not Found");
     }
 
     public List<Course> GetSchedule(int boootcampClassId)
@@ -50,6 +50,7 @@ public class CourseClassRepository : ICourseRepository
 
     public void Update(Course course)
     {
-        throw new NotImplementedException();
+        _dbContext.Update(course);
+        _dbContext.SaveChanges();
     }
 }

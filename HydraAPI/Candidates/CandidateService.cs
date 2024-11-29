@@ -118,5 +118,18 @@ namespace HydraAPI.Candidates
                 IsActive = request.IsActive
             });
         }
+        public List<CandidateByCourseBootcamp> GetCandidates(string courseId, int bootcampId){
+            courseId = courseId.Replace("%2F", "/"); // replace %2F to /
+            var model = _candidateRepository.GetCandidate(courseId, bootcampId)
+            .Select(
+                candidate => new CandidateByCourseBootcamp(){
+                    CandidateId = candidate.Id,
+                    CourseId = courseId,
+                    FullName = candidate.FirstName + " " + candidate.LastName
+                }
+            ).ToList();
+            return model;
+        }
     }
+
 }

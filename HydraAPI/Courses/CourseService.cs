@@ -42,8 +42,19 @@ public class CourseService
                     Status = schedule.Progress.ToString() == 1.ToString() ? "Planed" : 
                             schedule.Progress.ToString() == 2.ToString() ? "Active" : 
                             schedule.Progress.ToString() == 3.ToString() ? "Completed" : "Cancelled",
-                    EvaluationDate = schedule.EvaluationDate?.ToString("dd/MM/yyyy")
+                    EvaluationDate = schedule.EvaluationDate?.ToString("dd/MM/yyyy") ?? "Not Set"
                 }
             ).ToList();
+    }
+
+    public void UpdateProgress(string courseId){
+        courseId = courseId.Replace("%2F", "/");
+        var course = _courseRepository.GetCourse(courseId);
+        if(course.Progress == 1){
+            course.Progress = 2;
+        }else{
+            course.Progress = 3;
+        }
+        _courseRepository.Update(course);
     }
 }

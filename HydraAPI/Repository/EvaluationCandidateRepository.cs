@@ -40,4 +40,10 @@ public class EvaluationCandidateRepository : IEvaluationCandidate
         .Take(pageSize)
         .ToList();
     }
+
+    public void Insert(List<CandidateEvaluation> candidateEvaluation)
+    {
+        _dbContext.AddRange(candidateEvaluation);
+        _dbContext.SaveChanges();
+    }
 }

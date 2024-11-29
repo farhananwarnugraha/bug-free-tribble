@@ -147,5 +147,31 @@ namespace HydraAPI.Controllers
                 return BadRequest(response);
             }
         }
+
+        [HttpGet("candidates/{courseId}/{bootcampId}")]
+        [Authorize(Roles = "TrainingManager")]
+        public IActionResult GetCandidate(string courseId, int bootcampId){
+            try
+            {
+                var candidate = _candidateService.GetCandidates(courseId, bootcampId);
+                var response = new ResponseDTO<List<CandidateByCourseBootcamp>>()
+                {
+                    status = 200,
+                    Message = "Berhasil",
+                    Data = candidate
+                };
+                return Ok(response);
+            }
+            catch (Exception)
+            {
+                var response = new ResponseDTO<string>()
+                {
+                    status = 500,
+                    Message = "Gagal",
+                    Data = null
+                };
+                return BadRequest(response);
+            }
+        }
     }
 }

@@ -155,6 +155,16 @@ public class BootcampClassRepository : IBootcampClass
             .ToList();
     }
 
+    public BootcampClass GetBootcampPlaned(int batchBootcamp)
+    {
+        return _dbContext.BootcampClasses
+        .Include(bc => bc.Candidates)
+        .Where(
+            bootcampPlaned => (batchBootcamp == 0 || bootcampPlaned.Id == batchBootcamp) 
+            && bootcampPlaned.Progress == 1
+        ).FirstOrDefault() ?? throw new Exception("Bootcam Not Found"); 
+    }
+
     // get detail bootcamp active
     public BootcampClass GetDetailBootcamp(int batchBootcamp)
     {
@@ -168,7 +178,7 @@ public class BootcampClassRepository : IBootcampClass
         .Where(
             bootcamp => (bootcamp.Id == batchBootcamp) 
                 && 
-                (bootcamp.Progress == 2)
+                (bootcamp.Progress == 2) && bootcamp.Courses.All(c => c.Progress == 3)
                 // (bootcamp.Progress == 2 || bootcamp.Courses.Any(c => c.Progress == 2 &&
                 //     (c.Progress !=3 || c.EvaluationDate == null) &&
                 //     _dbContext.TrainerSkillDetails.Any(
