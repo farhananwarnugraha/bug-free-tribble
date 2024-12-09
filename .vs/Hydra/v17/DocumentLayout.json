@@ -1,7 +1,24 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Self Project\\AnotherProject\\Cloning\\hydra-api\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{7A6AC883-ED0E-4617-9B1D-ADD419DC603C}|HydraAPI\\HydraAPI.csproj|c:\\self project\\anotherproject\\cloning\\hydra-api\\hydraapi\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{7A6AC883-ED0E-4617-9B1D-ADD419DC603C}|HydraAPI\\HydraAPI.csproj|solutionrelative:hydraapi\\dockerfile||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A17A83E3-2318-4A17-A59A-32AEB0F9D127}|docker-compose.dcproj|c:\\self project\\anotherproject\\cloning\\hydra-api\\docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A17A83E3-2318-4A17-A59A-32AEB0F9D127}|docker-compose.dcproj|solutionrelative:docker-compose.yml||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A17A83E3-2318-4A17-A59A-32AEB0F9D127}|docker-compose.dcproj|c:\\self project\\anotherproject\\cloning\\hydra-api\\.dockerignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A17A83E3-2318-4A17-A59A-32AEB0F9D127}|docker-compose.dcproj|solutionrelative:.dockerignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{7A6AC883-ED0E-4617-9B1D-ADD419DC603C}|HydraAPI\\HydraAPI.csproj|c:\\self project\\anotherproject\\cloning\\hydra-api\\hydraapi\\hydraapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{7A6AC883-ED0E-4617-9B1D-ADD419DC603C}|HydraAPI\\HydraAPI.csproj|solutionrelative:hydraapi\\hydraapi.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +26,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -18,6 +35,56 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "docker-compose.yml",
+              "DocumentMoniker": "C:\\Self Project\\AnotherProject\\Cloning\\hydra-api\\docker-compose.yml",
+              "RelativeDocumentMoniker": "docker-compose.yml",
+              "ToolTip": "C:\\Self Project\\AnotherProject\\Cloning\\hydra-api\\docker-compose.yml",
+              "RelativeToolTip": "docker-compose.yml",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2024-12-03T04:10:11.344Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": ".dockerignore",
+              "DocumentMoniker": "C:\\Self Project\\AnotherProject\\Cloning\\hydra-api\\.dockerignore",
+              "RelativeDocumentMoniker": ".dockerignore",
+              "ToolTip": "C:\\Self Project\\AnotherProject\\Cloning\\hydra-api\\.dockerignore",
+              "RelativeToolTip": ".dockerignore",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-12-03T04:10:09Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "HydraAPI.csproj",
+              "DocumentMoniker": "C:\\Self Project\\AnotherProject\\Cloning\\hydra-api\\HydraAPI\\HydraAPI.csproj",
+              "RelativeDocumentMoniker": "HydraAPI\\HydraAPI.csproj",
+              "ToolTip": "C:\\Self Project\\AnotherProject\\Cloning\\hydra-api\\HydraAPI\\HydraAPI.csproj",
+              "RelativeToolTip": "HydraAPI\\HydraAPI.csproj",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2024-12-02T03:40:41.545Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Dockerfile",
+              "DocumentMoniker": "C:\\Self Project\\AnotherProject\\Cloning\\hydra-api\\HydraAPI\\Dockerfile",
+              "RelativeDocumentMoniker": "HydraAPI\\Dockerfile",
+              "ToolTip": "C:\\Self Project\\AnotherProject\\Cloning\\hydra-api\\HydraAPI\\Dockerfile",
+              "RelativeToolTip": "HydraAPI\\Dockerfile",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2024-12-02T03:36:39.887Z",
+              "EditorCaption": ""
             }
           ]
         }

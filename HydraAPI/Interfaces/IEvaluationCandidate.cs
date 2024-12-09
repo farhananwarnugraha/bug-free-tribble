@@ -10,4 +10,6 @@ public interface IEvaluationCandidate
     int Count(string fullName);
 
     void Insert(List<CandidateEvaluation>  candidateEvaluation);
+
+    void Insert(CandidateEvaluation candidateEvaluation);
 }

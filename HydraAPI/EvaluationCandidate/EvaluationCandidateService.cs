@@ -9,10 +9,12 @@ namespace HydraAPI.EvaluationCandidate;
 public class EvaluationCandidateService
 {
     private readonly IEvaluationCandidate _evaluationCandidateRepository;
+    private readonly ICandidateRepository _candidateRepository;
 
-    public EvaluationCandidateService(IEvaluationCandidate evaluationCandidateRepository)
+    public EvaluationCandidateService(IEvaluationCandidate evaluationCandidateRepository, ICandidateRepository candidateRepository)
     {
         _evaluationCandidateRepository = evaluationCandidateRepository;
+        _candidateRepository = candidateRepository;
     }
 
     public EvaluationCandidateResponseDTO GetEvaluation(int pageNumber, int pageSize, string fullName){
@@ -35,7 +37,7 @@ public class EvaluationCandidateService
         };
     }
 
-    public void Insert(AddEvaliationCandidateDTO request){
+    public void Inserts(AddEvaliationCandidateDTO request){
         if(request.CourseId == null || request.CandidateId == null || request.Marks == null ){
             throw new ArgumentException("All fields are required");
         }
@@ -74,5 +76,34 @@ public class EvaluationCandidateService
             //     item.Mark = request.Marks[0];
             // }
             
+    }
+
+    public void Insert (EvaluationCandidateReqDTO modelRequest){
+        var model = new CandidateEvaluation{
+            CourseId = modelRequest.CourseId,
+            CandidateId = modelRequest.CandidateId,
+            Mark = modelRequest.Mark,
+            Notes = modelRequest.Note,
+            Passed = modelRequest.Mark >= 50 ? true : false
+        };
+
+        if( model.Mark >=50 ){
+            _evaluationCandidateRepository.Insert(model);
+        }
+        else{
+            _evaluationCandidateRepository.Insert(model);
+            var candidateModel = _candidateRepository.Get(model.CandidateId);
+            candidateModel.IsActive = false;
+            _candidateRepository.Update(candidateModel);
+        }
+        // _evaluationCandidateRepository.Insert(new CandidateEvaluation{
+        //     CourseId = modelRequest.CourseId,
+        //     CandidateId = modelRequest.CandidateId,
+        //     Mark = modelRequest.Mark,
+        //     Notes = modelRequest.Note,
+        //     Passed = modelRequest.Mark >= 50 ? true : false
+        // });
+
+        
     }
 }

@@ -57,4 +57,11 @@ public class CourseService
         }
         _courseRepository.Update(course);
     }
+
+    public void UpdateCourse(string courseId){
+        courseId = courseId.Replace("%2F", "/");
+        var course = _courseRepository.GetCourse(courseId);
+        course.EvaluationDate = DateTime.Now;
+        _courseRepository.Update(course);
+    }
 }

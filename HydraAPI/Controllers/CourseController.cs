@@ -1,3 +1,4 @@
+using System.Linq.Expressions;
 using HydraAPI.Courses;
 using HydraAPI.Courses.DTO;
 using HydraAPI.Shared;
@@ -80,6 +81,29 @@ namespace HydraAPI.Controllers
             //     };
             //     return BadRequest(respose);
             // }
+        }
+
+        [HttpPut("bootcampclass/course-evaluation/{courseId}")]
+        public IActionResult UpdateEvaluationDate(string courseId){
+            try
+            {
+                _courseService.UpdateCourse(courseId);
+                var response = new ResponseDTO<string>(){
+                    status = 200,
+                    Message = "Success",
+                    Data = "Berhasil Mengubah Data"
+                };
+                return Ok(response);
+            }
+            catch (System.Exception)
+            {
+                var response = new ResponseDTO<string>(){
+                    status = 400,
+                    Message = "Failed",
+                    Data = "Gagal Mengubah Data"
+                };
+                return BadRequest(response);
+            }
         }
     }
 }

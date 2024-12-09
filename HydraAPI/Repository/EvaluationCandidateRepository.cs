@@ -46,4 +46,10 @@ public class EvaluationCandidateRepository : IEvaluationCandidate
         _dbContext.AddRange(candidateEvaluation);
         _dbContext.SaveChanges();
     }
+
+    public void Insert(CandidateEvaluation candidateEvaluation)
+    {
+        _dbContext.Add(candidateEvaluation);
+        _dbContext.SaveChanges();
+    }
 }

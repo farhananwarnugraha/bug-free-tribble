@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  hydraapi:
+    image: ${DOCKER_REGISTRY-}hydraapi
+    build:
+      context: .
+      dockerfile: HydraAPI/Dockerfile

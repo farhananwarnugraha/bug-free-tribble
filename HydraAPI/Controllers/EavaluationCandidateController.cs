@@ -35,13 +35,36 @@ public class EavaluationCandidateController : ControllerBase
     public IActionResult Insert(AddEvaliationCandidateDTO dto){
         try
         {
-            _ecService.Insert(dto);
+            _ecService.Inserts(dto);
             return Ok("Berhasil");
         }
         catch (System.Exception)
         {
             
             return BadRequest("Gagal");
+        }
+    }
+    [HttpPost("add-evaluation")]
+    [Authorize(Roles = "TrainingManager, Trainer")]
+    public IActionResult AddEvaluation(EvaluationCandidateReqDTO dto){
+        try
+        {
+            _ecService.Insert(dto);
+            var response = new ResponseDTO<string>(){
+                status = 200,
+                Message = "Success",
+                Data = "Berhasil Menambahkan Data"
+            };
+            return Ok(response);
+        }
+        catch (System.Exception)
+        {
+            var response = new ResponseDTO<string>(){
+                status = 400,
+                Message = "Failed",
+                Data = "Gagal Menambahkan Data"
+            };
+            return BadRequest(response);
         }
     }
 }

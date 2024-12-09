@@ -66,7 +66,8 @@ namespace HydraAPI.Repository
             return _candidateContext.Candidates
                 .Include(c => c.BootcampClass)
                     .ThenInclude(bc => bc.Courses)
-                .Where(c => c.BootcampClassId == batchBootcamp && c.BootcampClass.Courses.Any(c => c.Id == courseId))
+                .Include(c => c.CandidateEvaluations)
+                .Where(c => c.BootcampClassId == batchBootcamp && c.BootcampClass.Courses.Any(c => c.Id == courseId) && c.IsActive == true && !c.CandidateEvaluations.Any( ce => ce.CourseId == courseId))
                 .ToList();
         }
 
